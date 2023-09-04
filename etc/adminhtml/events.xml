@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+    <event name="order_cancel_after">
+        <observer name="order_cancel" instance="Eastz\AutoShipment\Observer\OrdersCancelObserver" />
+    </event>
+    <event name="admin_sales_order_address_update">
+        <observer name="order_address_edit" instance="Eastz\AutoShipment\Observer\OrdersAddressEditObserver" />
+    </event>
+</config>

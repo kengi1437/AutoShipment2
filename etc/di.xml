@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Magento\Sales\Model\Order">
+        <plugin disabled="false" name="Eastz_AutoShipment_Plugin_Magento_Sales_Model_Order" sortOrder="1" type="Eastz\AutoShipment\Plugin\OrderStateUpdate" />
+    </type>
+    <type name="Magento\Framework\Console\CommandList">
+        <arguments>
+            <argument name="commands" xsi:type="array">
+                <item name="auto_shipment_create_command" xsi:type="object">\Eastz\AutoShipment\Console\Command\Shipment</item>
+                <item name="auto_shipment_label_command" xsi:type="object">\Eastz\AutoShipment\Console\Command\ShippingLabel</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <!-- 添加新的日志实例 -->
+    <type name="Eastz\AutoShipment\Controller\Shipany\Notify">
+        <arguments>
+            <argument name="autoShipmentLogger" xsi:type="object">Eastz\AutoShipment\Logger\AutoShipmentLogger</argument>
+        </arguments>
+    </type>
+
+    <virtualType name="Eastz\AutoShipment\Logger\AutoShipmentLogger" type="Monolog\Logger">
+        <arguments>
+            <argument name="name" xsi:type="string">autoShipment</argument>
+            <argument name="handlers" xsi:type="array">
+                <item name="debug" xsi:type="object">Eastz\AutoShipment\Logger\Handler</item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+</config>

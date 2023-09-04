@@ -1,0 +1,32 @@
+<?php ?>
+<script>
+    require([
+        'jquery',
+        'prototype',
+        'loader'
+    ], function() {
+        function syncronize() {
+            let headers = new Headers();
+            headers.append('Content-Type', 'application/json');
+            headers.append('api-tk', '<?php echo $block->getApiToken() ?>')
+            const myInit = {
+                method: 'POST',
+                headers: headers,
+                mode: 'cors',
+                cache: 'default',
+                body: '<?php echo json_encode($block->getStore()) ?>'
+            };
+            let myRequest = new Request('<?php echo $block->getAjaxSyncUrl() . "/magento/webhooks/register-webhook-info/" ?>');
+            fetch(myRequest, myInit).then(function(response) {
+                jQuery('body').loader('hide');
+            });
+        }
+
+        jQuery('#webhook_activat_btn').click(function() {
+            jQuery('body').loader('show');
+            syncronize();
+        });
+    });
+</script>
+
+<?php echo $block->getButtonHtml() ?>

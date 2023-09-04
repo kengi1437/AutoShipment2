@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <table name="ez_autoshipment_shiporder" resource="default" engine="innodb" comment="Ship Order Table">
+        <column xsi:type="int" name="entity_id" unsigned="true" nullable="false" identity="true"
+                comment="Entity ID"/>
+        <column xsi:type="int" name="order_id" unsigned="true" nullable="false" identity="false"
+                default="0" comment="Order ID"/>
+        <column xsi:type="smallint" name="store_id" unsigned="true" nullable="true" identity="false"
+                comment="Store ID"/>
+        <column xsi:type="varchar" name="code" nullable="false" length="100" comment="Code"/>
+        <column xsi:type="varchar" name="content" nullable="false" length="100" comment="Content"/>
+        <column xsi:type="tinyint" name="status" unsigned="true" nullable="false" identity="false"
+                default="0" comment="Status"/>
+
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="entity_id"/>
+        </constraint>
+    </table>
+
+    <table name="ez_autoshipment_shiplog" resource="default" engine="innodb" comment="Ship Log Table">
+        <column xsi:type="int" name="entity_id" unsigned="true" nullable="false" identity="true"
+                comment="Entity ID"/>
+        <column xsi:type="int" name="order_id" unsigned="true" nullable="false" identity="false"
+                default="0" comment="Order ID"/>
+        <column xsi:type="smallint" name="store_id" unsigned="true" nullable="true" identity="false"
+                comment="Store ID"/>
+        <column xsi:type="varchar" name="content" nullable="false" length="100" comment="Content"/>
+        <column xsi:type="tinyint" name="status" unsigned="true" nullable="false" identity="false"
+                default="0" comment="Status"/>
+
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="entity_id"/>
+        </constraint>
+    </table>
+
+    <!-- Sales Order -->
+    <table name="sales_order" resource="sales" engine="innodb" comment="sales order">
+        <column xsi:type="tinyint" name="shipany_status" unsigned="true" nullable="false" identity="false"
+                default="0" comment="Shipany Status"/>
+    </table>
+    <table name="sales_order_grid" resource="sales" engine="innodb" comment="sales order grid">
+        <column xsi:type="tinyint" name="shipany_status" unsigned="true" nullable="false" identity="false"
+                default="0" comment="Shipany Status"/>
+    </table>
+</schema>
